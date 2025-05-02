@@ -19,7 +19,7 @@ data_transformation:
 # MODEL TRAINING  
 model_trainer: 
       model_name: model1   # mt: multithreading
-      model_train_num: 10
+      model_train_num: 11
       data_transformation_name: dt1
       model_training_type: m  # rcv: randomisedcv, gcv: gridcv, r: randomisedTrainVal, g: gridTrainVal, m: many models
 
@@ -37,7 +37,7 @@ model_trainer:
 
       # Càn cho model_training_type = m
       models: 
-            - XGBClassifier(n_estimators=300, max_depth=30, reg_alpha=1, reg_lambda=5, learning_rate=0.01)|9
+            - XGBClassifier(n_estimators=200, max_depth=30, reg_alpha=1, reg_lambda=5, learning_rate=0.005)|10
 
 
 # MODEL EVALUATION ON TRAIN VAL

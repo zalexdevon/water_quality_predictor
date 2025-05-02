@@ -12,7 +12,7 @@ data_transformation:
       data_correction_name: dc1
       do_smote: f # t: true, f: false
       list_after_feature_transformer:
-            - PolynomialFeature(degree=2, include_bias=False)
+            - PolynomialFeatures(degree=2, include_bias=False)
 
 
 

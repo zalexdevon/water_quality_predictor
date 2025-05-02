@@ -17,7 +17,7 @@ data_transformation:
 # MODEL TRAINING  
 model_trainer: 
       model_name: model1   # mt: multithreading
-      model_train_num: 0
+      model_train_num: 1
       data_transformation_name: dt1
       model_training_type: m  # rcv: randomisedcv, gcv: gridcv, r: randomisedTrainVal, g: gridTrainVal, m: many models
 
@@ -35,9 +35,7 @@ model_trainer:
 
       # Càn cho model_training_type = m
       models: 
-            - LogisticRegression(penalty='l2', C=1, max_iter=1000)|0
-            - LogisticRegression(penalty='l2', C=10, max_iter=1000)|1
-            - LogisticRegression(penalty='l2', C=100, max_iter=1000)|2
+            - XGBClassfier(n_estimators=300, max_depth=40)|3
 
 
 # MODEL EVALUATION ON TRAIN VAL

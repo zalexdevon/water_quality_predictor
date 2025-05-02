@@ -8,10 +8,12 @@ data_correction:
 
 # DATA TRANSFORMATION
 data_transformation: 
-      number: dt1            # id của data_transformation
+      number: dt2            # id của data_transformation
       data_correction_name: dc1
       do_smote: f # t: true, f: false
-      list_after_feature_transformer: []
+      list_after_feature_transformer:
+            - PolynomialFeature(degree=2, include_bias=False)
+
 
 
 # MODEL TRAINING  

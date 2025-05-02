@@ -12,43 +12,32 @@ class DC:
         # Xóa các cột không cần thiết
         df = df.drop(
             columns=[
-                "Ethnicity",
-                "EmploymentStatus",
-                "MaritalStatus",
+                "taken_time",
             ]
         )
 
         #  Đổi tên cột
         rename_dict = {
-            "Age": "Age_num",
-            "Gender": "Gender_nom",
-            "Cholesterol": "Cholesterol_num",
-            "BloodPressure": "BloodPressure_num",
-            "HeartRate": "HeartRate_num",
-            "BMI": "BMI_num",
-            "Smoker": "Smoker_bin",
-            "Diabetes": "Diabetes_bin",
-            "Hypertension": "Hypertension_bin",
-            "FamilyHistory": "FamilyHistory_bin",
-            "PhysicalActivity": "PhysicalActivity_numcat",
-            "AlcoholConsumption": "AlcoholConsumption_numcat",
-            "Diet": "Diet_ord",
-            "StressLevel": "StressLevel_numcat",
-            "Income": "Income_num",
-            "EducationLevel": "EducationLevel_ord",
-            "Medication": "Medication_bin",
-            "ChestPainType": "ChestPainType_nom",
-            "ECGResults": "ECGResults_nom",
-            "MaxHeartRate": "MaxHeartRate_num",
-            "ST_Depression": "ST_Depression_num",
-            "ExerciseInducedAngina": "ExerciseInducedAngina_bin",
-            "Slope": "Slope_nom",
-            "NumberOfMajorVessels": "NumberOfMajorVessels_numcat",
-            "Thalassemia": "Thalassemia_nom",
-            "PreviousHeartAttack": "PreviousHeartAttack_bin",
-            "StrokeHistory": "StrokeHistory_bin",
-            "Residence": "Residence_nom",
-            "Outcome": "Outcome_target",
+            "pH": "pH_num",
+            "Iron": "Iron_num",
+            "Nitrate": "Nitrate_num",
+            "Chloride": "Chloride_num",
+            "Lead": "Lead_num",
+            "Zinc": "Zinc_num",
+            "Color": "Color_ord",
+            "Turbidity": "Turbidity_num",
+            "Fluoride": "Fluoride_num",
+            "Copper": "Copper_num",
+            "Odor": "Odor_num",
+            "Sulfate": "Sulfate_num",
+            "Conductivity": "Conductivity_num",
+            "Chlorine": "Chlorine_num",
+            "Manganese": "Manganese_num",
+            "Total Dissolved Solids": "Total_Dissolved_Solids_num",
+            "Source": "Source_nom",
+            "Water Temperature": "Water_Temperature_num",
+            "Air Temperature": "Air_Temperature_num",
+            "Target": "Target_target",
         }
 
         df = df.rename(columns=rename_dict)
@@ -107,14 +96,11 @@ class DC:
 
 
 FEATURE_ORDINAL_DICT = {
-    "Smoker_bin": [0, 1],
-    "Diabetes_bin": [0, 1],
-    "Hypertension_bin": [0, 1],
-    "FamilyHistory_bin": [0, 1],
-    "Medication_bin": ["No", "Yes"],
-    "ExerciseInducedAngina_bin": ["No", "Yes"],
-    "PreviousHeartAttack_bin": [0, 1],
-    "StrokeHistory_bin": [0, 1],
-    "Diet_ord": ["Unhealthy", "Moderate", "Healthy"],
-    "EducationLevel_ord": ["High School", "College", "Postgraduate"],
+    "Color_ord": [
+        "Colorless",
+        "Near Colorless",
+        "Faint Yellow",
+        "Light Yellow",
+        "Yellow",
+    ],
 }

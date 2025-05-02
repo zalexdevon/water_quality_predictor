@@ -15,7 +15,7 @@ from imblearn.over_sampling import SMOTE
 from Mylib import stringToObjectConverter
 import re
 from sklearn.impute import SimpleImputer
-from classifier.data_correction_code.dc2 import DC, FEATURE_ORDINAL_DICT
+from classifier.data_correction_code.dc1 import DC, FEATURE_ORDINAL_DICT
 
 
 class DataCorrection:

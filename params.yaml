@@ -1,0 +1,60 @@
+# COMMON
+scoring: accuracy
+target_score: 0.99
+
+# DATA CORRECTION
+data_correction: 
+      name: dc1   # id của data correction 
+
+# DATA TRANSFORMATION
+data_transformation: 
+      number: dt3_batch_50000            # id của data_transformation
+      data_correction_name: dc2
+      do_smote: f # t: true, f: false
+      list_after_feature_transformer:
+            - PolynomialFeatures(degree=2, include_bias=False)
+            - PCA(n_components = 0.95)
+
+
+# MODEL TRAINING  
+model_trainer: 
+      model_name: model20_batch_50000  # mt: multithreading
+      model_train_num: 31
+      data_transformation_name: dt3_batch_50000
+      model_training_type: m  # rcv: randomisedcv, gcv: gridcv, r: randomisedTrainVal, g: gridTrainVal, m: many models
+
+      # Cần cho model_training_type = rcv, gcv, r, g
+      base_model: XGBClassifier(random_state=42)
+      n_iter: 1 # số tổ hợp chọn khi chạy random search
+      param_grid:
+            n_estimators: 100-200
+            max_depth: 10-20
+            reg_alpha: 0-1
+            reg_lambda: 1-5
+            learning_rate: 10
+            subsample: 0.9-1
+            colsample_bytree: 0.9-1
+
+      # Càn cho model_training_type = m
+      models: 
+            - RandomForestClassifier(n_estimators=200, max_depth=20, warm_start=True)|8
+            - RandomForestClassifier(n_estimators=300, max_depth=30, warm_start=True)|9
+
+
+# MODEL EVALUATION ON TRAIN VAL
+model_evaluation_on_train_val: 
+      data_transformation_number: dt1
+      model_name: model1
+      model_index: 1
+                  
+# MODEL EVALUATION
+model_evaluation: 
+      data_correction_name: dc1
+      data_transformation_no: dt1
+      model_name: XGB_12
+
+# MONITOR PLOT
+monitor_plotter:
+      target_val_value: 99
+      max_val_value: 100
+      dtick_y_value: 5

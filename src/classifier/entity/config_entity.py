@@ -1,0 +1,122 @@
+from dataclasses import dataclass
+from pathlib import Path
+
+
+@dataclass(frozen=True)
+class DataCorrectionConfig:
+    # config input
+    train_data_path: Path
+
+    # config output
+    root_dir: Path
+    data_path: Path
+    feature_ordinal_dict_path: Path
+    correction_transformer_path: Path
+
+
+@dataclass(frozen=True)
+class DataTransformationConfig:
+    # config input
+    train_data_path: Path
+    feature_ordinal_dict_path: Path
+    correction_transformer_path: Path
+    val_data_path: Path
+
+    # config output
+    root_dir: Path
+    transformation_transformer_path: Path
+    train_features_path: Path
+    train_target_path: Path
+    val_features_path: Path
+    val_target_path: Path
+    class_names_path: Path
+
+    # params
+    do_smote: str
+    list_after_feature_transformer: list
+
+    # params được suy ra
+    batch_size: int
+
+
+@dataclass(frozen=True)
+class ModelTrainerConfig:
+    # config input
+    data_transformation_path: Path
+    train_feature_path: Path
+    train_target_path: Path
+    val_feature_path: Path
+    val_target_path: Path
+
+    # config output
+    root_dir: Path
+
+    # config common
+    plot_dir: Path
+
+    # params
+    model_name: str
+    model_training_type: str
+
+    # params to use GridSearch
+    base_model: str
+    n_iter: int
+    param_grid: dict
+
+    # params to train many models
+    models: list
+
+    # common params
+    scoring: str
+    target_score: float
+
+    # param được suy ra
+    do_run_on_batch: bool
+    do_run_with_multithreading: bool
+
+
+@dataclass(frozen=True)
+class ModeEvaluationOnTrainValDataConfig:
+    # config input
+    data_transformation_path: Path
+    model_path: Path
+
+    # config output
+    root_dir: Path
+
+
+# TEST DATA CORRECTION
+@dataclass(frozen=True)
+class TestDataCorrectionConfig:
+    # input
+    test_raw_data_path: Path
+    preprocessor_path: Path
+
+    # output
+    root_dir: Path
+    test_data_path: Path
+
+
+# MODEL_EVALUATION
+@dataclass(frozen=True)
+class ModelEvaluationConfig:
+    # input
+    test_data_path: Path
+    preprocessor_path: Path
+    model_path: Path
+    class_names_path: Path
+
+    # output
+    root_dir: Path
+    results_path: Path
+
+    # common params
+    scoring: str
+
+
+@dataclass(frozen=True)
+class MonitorPlotterConfig:
+    plot_dir: Path
+    target_val_value: float
+    max_val_value: float
+    dtick_y_value: float

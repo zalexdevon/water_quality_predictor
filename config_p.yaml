@@ -1,0 +1,75 @@
+artifacts_root: artifacts
+plot_dir: artifacts/plot
+
+
+# DATA CORRECTION
+data_correction:
+      # input 
+      train_data_path: artifacts/data_ingestion/train_data.pkl
+
+      # output
+      root_dir: artifacts/data_correction_${C}
+      data_path: artifacts/data_correction_${C}/data.pkl
+      feature_ordinal_dict_path: artifacts/data_correction_${C}/feature_ordinal_dict.pkl
+      correction_transformer_path: artifacts/data_correction_${C}/transformer.pkl
+
+# DATA TRANSFORMATION
+data_transformation:
+      # input 
+      train_data_path: artifacts/data_correction_${CP}/data.pkl
+      feature_ordinal_dict_path: artifacts/data_correction_${CP}/feature_ordinal_dict.pkl
+      correction_transformer_path: artifacts/data_correction_${CP}/transformer.pkl
+      val_data_path: artifacts/data_ingestion/val_data.pkl
+
+      # output
+      root_dir: artifacts/data_transformation_${P}
+      transformation_transformer_path: artifacts/data_transformation_${P}/transformer.pkl
+      train_features_path: artifacts/data_transformation_${P}/train_features.pkl
+      train_target_path: artifacts/data_transformation_${P}/train_target.pkl
+      val_features_path: artifacts/data_transformation_${P}/val_features.pkl
+      val_target_path: artifacts/data_transformation_${P}/val_target.pkl
+      class_names_path: artifacts/data_transformation_${P}/class_names.pkl
+
+# MODEL TRAINING
+model_trainer:
+      # input
+      data_transformation_path: artifacts/data_transformation_${PT}
+      train_feature_path: artifacts/data_transformation_${PT}/train_features.pkl
+      train_target_path: artifacts/data_transformation_${PT}/train_target.pkl
+      val_feature_path: artifacts/data_transformation_${PT}/val_features.pkl
+      val_target_path: artifacts/data_transformation_${PT}/val_target.pkl
+
+      # output
+      root_dir: artifacts/model_trainer/${T}
+
+# MODEL EVALUATION ON TRAIN VAL
+model_evaluation_on_train_val: 
+      # input 
+      data_transformation_path: artifacts/data_transformation_${PV}
+      model_path: artifacts/model_trainer/${MV}/${MIV}.pkl
+
+      # output 
+      root_dir: artifacts/model_evaluation_on_train_val/${MV}/${MIV}
+
+# TEST DATA CORRECTION 
+test_data_correction: 
+      # input 
+      test_raw_data_path: artifacts/data_ingestion/test_data.pkl
+      preprocessor_path: artifacts/data_correction_${CE}/preprocessor.pkl
+
+      # output
+      root_dir: artifacts/test_data_correction
+      test_data_path: artifacts/test_data_correction/test_data.pkl
+
+
+# MODEL_EVALUATION
+model_evaluation:
+      # input
+      test_data_path: artifacts/test_data_correction/test_data.pkl
+      preprocessor_path: artifacts/data_transformation_${PE}/preprocessor.pkl
+      model_path: artifacts/model_trainer/${E}/best_model.pkl
+      class_names_path: artifacts/data_correction/class_names.pkl
+
+      # output
+      root_dir: artifacts/model_evaluation/${E}
+      results_path: artifacts/model_evaluation/${E}/results.txt

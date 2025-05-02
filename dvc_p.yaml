@@ -1,0 +1,44 @@
+stages:
+      data_correction:
+            cmd: python src/classifier/pipeline/stage_data_correction.py
+            params:
+                  - data_correction.name
+
+      # data_transformation:
+      #       cmd: python src/classifier/pipeline/stage_data_transformation.py
+      #       params:
+      #             - data_transformation.number
+      #       outs:
+      #             - artifacts/data_transformation_${PT}
+
+      model_trainer:
+            cmd: python src/classifier/pipeline/stage_model_training.py
+            deps:
+                  - artifacts/data_transformation_${PT}
+            params:
+                  - model_trainer.model_name
+                  - model_trainer.model_train_num
+
+      model_evaluation_on_train_val: 
+            cmd: python src/classifier/pipeline/stage_model_evaluation_on_train_val.py
+            params: 
+                  - model_evaluation_on_train_val
+
+      test_data_correction: 
+            cmd: python src/classifier/pipeline/stage_test_data_correction.py
+            outs: 
+                  - artifacts/test_data_correction
+
+      model_evaluation:
+            cmd: python src/classifier/pipeline/stage_model_evaluation.py
+            deps: 
+                  - artifacts/test_data_correction
+            params:
+                  - model_evaluation
+
+      monitor_plot: 
+            cmd: python src/classifier/pipeline/stage_monitor_plot.py
+            deps: 
+                  - artifacts/plot
+            params: 
+                  - monitor_plotter

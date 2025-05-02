@@ -56,4 +56,4 @@ model_evaluation:
 monitor_plotter:
       target_val_value: 99
       max_val_value: 100
-      dtick_y_value: 5
+      dtick_y_value: 5000

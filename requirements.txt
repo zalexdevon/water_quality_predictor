@@ -14,4 +14,4 @@ lightgbm
 imbalanced-learn
 scipy
 zzzz_mylib_23_4==0.57
--e .q
+-e

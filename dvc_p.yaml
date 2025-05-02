@@ -8,13 +8,13 @@ stages:
             cmd: python src/classifier/pipeline/stage_data_transformation.py
             params:
                   - data_transformation.number
-            outs:
-                  - artifacts/data_transformation_${PT}
+            # outs:
+            #       - artifacts/data_transformation_${PT}
 
       model_trainer:
             cmd: python src/classifier/pipeline/stage_model_training.py
-            deps:
-                  - artifacts/data_transformation_${PT}
+            # deps:
+            #       - artifacts/data_transformation_${PT}
             params:
                   - model_trainer.model_name
                   - model_trainer.model_train_num

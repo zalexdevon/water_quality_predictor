@@ -14,7 +14,6 @@ data_transformation:
       list_after_feature_transformer: []
 
 
-
 # MODEL TRAINING  
 model_trainer: 
       model_name: model20_batch_50000  # mt: multithreading

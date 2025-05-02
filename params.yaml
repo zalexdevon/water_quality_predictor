@@ -14,8 +14,6 @@ data_transformation:
       list_after_feature_transformer: []
 
 
-
-
 # MODEL TRAINING  
 model_trainer: 
       model_name: model3   # mt: multithreading

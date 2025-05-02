@@ -4,12 +4,12 @@ stages:
             params:
                   - data_correction.name
 
-      # data_transformation:
-      #       cmd: python src/classifier/pipeline/stage_data_transformation.py
-      #       params:
-      #             - data_transformation.number
-      #       outs:
-      #             - artifacts/data_transformation_${PT}
+      data_transformation:
+            cmd: python src/classifier/pipeline/stage_data_transformation.py
+            params:
+                  - data_transformation.number
+            outs:
+                  - artifacts/data_transformation_${PT}
 
       model_trainer:
             cmd: python src/classifier/pipeline/stage_model_training.py

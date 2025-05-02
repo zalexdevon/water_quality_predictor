@@ -8,12 +8,11 @@ data_correction:
 
 # DATA TRANSFORMATION
 data_transformation: 
-      number: dt3_batch_50000            # id của data_transformation
-      data_correction_name: dc2
+      number: dt1            # id của data_transformation
+      data_correction_name: dc1
       do_smote: f # t: true, f: false
-      list_after_feature_transformer:
-            - PolynomialFeatures(degree=2, include_bias=False)
-            - PCA(n_components = 0.95)
+      list_after_feature_transformer: []
+
 
 
 # MODEL TRAINING  

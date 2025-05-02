@@ -62,9 +62,9 @@ class ManyModelsTypeModelTrainer:
                 os.path.join(self.config.root_dir, f"{model_index}.pkl")
             )
 
-            print(f"Bắt đầu train 1 model")
+            print(f"Bắt đầu train model {model_index}")
             model.fit(self.train_feature_data, self.train_target_data)
-            print(f"Kết thúc train 1 model")
+            print(f"Kết thúc train model {model_index}")
 
             train_scoring = myfuncs.evaluate_model_on_one_scoring_17(
                 model,

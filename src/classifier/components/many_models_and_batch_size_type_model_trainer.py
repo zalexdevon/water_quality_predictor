@@ -95,9 +95,9 @@ class ManyModelsAndBatchSizeTypeModelTrainer:
             print(f"Model: {model}")
             # d
 
-            print(f"Bắt đầu train 1 model")
+            print(f"Bắt đầu train  model {model_index}")
             train_scoring = self.train_on_batches(model)
-            print(f"Kết thúc train 1 model")
+            print(f"Kết thúc train model {model_index}")
 
             val_scoring = myfuncs.evaluate_model_on_one_scoring_17(
                 model,

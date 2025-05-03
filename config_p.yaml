@@ -19,7 +19,7 @@ data_transformation:
       train_data_path: artifacts/data_correction_${CP}/data.pkl
       feature_ordinal_dict_path: artifacts/data_correction_${CP}/feature_ordinal_dict.pkl
       correction_transformer_path: artifacts/data_correction_${CP}/transformer.pkl
-      weights_path: artifacts/data_correction_${WEIGHTED}/weights.pkl
+      weights_path: artifacts/data_transformation_${WEIGHTED}/weights.pkl
       val_data_path: artifacts/data_ingestion/val_data.pkl
       
 

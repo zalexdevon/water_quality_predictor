@@ -18,7 +18,7 @@ data_transformation:
 model_trainer: 
       model_name: model5   # mt: multithreading
       data_transformation_name: dt5
-      model_train_num: 23
+      model_train_num: 24
       model_training_type: m  # rcv: randomisedcv, gcv: gridcv, r: randomisedTrainVal, g: gridTrainVal, m: many models
 
       # Cần cho model_training_type = rcv, gcv, r, g

@@ -2,6 +2,7 @@ import pandas as pd
 from Mylib import myfuncs
 from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
+import numpy as np
 
 
 class DC:

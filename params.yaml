@@ -22,7 +22,7 @@ data_transformation:
 model_trainer: 
       model_name: model6   # mt: multithreading
       data_transformation_name: dt1_new_weighted
-      model_train_num: 33
+      model_train_num: 34
       model_training_type: m  # rcv: randomisedcv, gcv: gridcv, r: randomisedTrainVal, g: gridTrainVal, m: many models
 
       # Cần cho model_training_type = rcv, gcv, r, g
@@ -39,8 +39,7 @@ model_trainer:
 
       # Càn cho model_training_type = m
       models: 
-            - XGBClassifier(n_estimators=400, max_depth=50, reg_alpha=5, reg_lambda=10, learning_rate=0.005)|5
-
+            - XGBClassifier(n_estimators=400, max_depth=50, reg_alpha=1, reg_lambda=10, learning_rate=0.005)|4
 
 
 

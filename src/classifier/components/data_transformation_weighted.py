@@ -16,16 +16,11 @@ from Mylib import stringToObjectConverter
 from Mylib import myclasses
 
 
-class DataTransformation:
+class DataTransformationWeighted:
     def __init__(self, config: DataTransformationConfig):
         self.config = config
 
     def load_data(self):
-        # TODO: d
-        print(f"data correction path: {self.config.train_data_path}")
-
-        # d
-
         self.df_train = myfuncs.load_python_object(self.config.train_data_path)
         self.feature_ordinal_dict = myfuncs.load_python_object(
             self.config.feature_ordinal_dict_path
@@ -68,6 +63,10 @@ class DataTransformation:
                 (
                     "during",
                     myclasses.DuringFeatureTransformer(self.feature_ordinal_dict),
+                ),
+                (
+                    "1",
+                    myclasses.MultiplyWeightsTransformer(weights=self.config.weights),
                 ),
                 ("after", after_feature_pipeline),
             ]

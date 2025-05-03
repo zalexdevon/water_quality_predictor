@@ -14,18 +14,15 @@ from sklearn.base import BaseEstimator, TransformerMixin
 from imblearn.over_sampling import SMOTE
 from Mylib import stringToObjectConverter
 from Mylib import myclasses
+import os
+import math
 
 
-class DataTransformation:
+class DataTransformationWeightedBatch:
     def __init__(self, config: DataTransformationConfig):
         self.config = config
 
     def load_data(self):
-        # TODO: d
-        print(f"data correction path: {self.config.train_data_path}")
-
-        # d
-
         self.df_train = myfuncs.load_python_object(self.config.train_data_path)
         self.feature_ordinal_dict = myfuncs.load_python_object(
             self.config.feature_ordinal_dict_path
@@ -68,6 +65,12 @@ class DataTransformation:
                 (
                     "during",
                     myclasses.DuringFeatureTransformer(self.feature_ordinal_dict),
+                ),
+                (
+                    "1",
+                    myclasses.ManyConvNetBlocks_AdvancedMultiplyWeightsTransformer(
+                        weights=self.config.weights
+                    ),
                 ),
                 ("after", after_feature_pipeline),
             ]
@@ -116,12 +119,27 @@ class DataTransformation:
             ].categories_[0]
         )
 
+        # Lưu dữ liệu
         myfuncs.save_python_object(
             self.config.transformation_transformer_path, self.transformation_transformer
         )
-        myfuncs.save_python_object(self.config.train_features_path, df_train_feature)
-        myfuncs.save_python_object(self.config.train_target_path, df_train_target)
         myfuncs.save_python_object(self.config.val_features_path, df_val_feature)
         myfuncs.save_python_object(self.config.val_target_path, df_val_target)
-        myfuncs.save_python_object(self.config.val_target_path, df_val_target)
         myfuncs.save_python_object(self.config.class_names_path, class_names)
+
+        num_train_samples = len(df_train_transformed)
+        num_batch = math.ceil(num_train_samples / self.config.batch_size)
+        myfuncs.save_python_object(
+            os.path.join(self.config.root_dir, "num_batch.pkl"), num_batch
+        )
+        for i, index_batch in enumerate(
+            range(0, num_train_samples, self.config.batch_size)
+        ):
+            feature = df_train_feature.iloc[i : i + self.config.batch_size, :]
+            target = df_train_target.iloc[i : i + self.config.batch_size]
+            myfuncs.save_python_object(
+                os.path.join(self.config.root_dir, f"train_features_{i}.pkl"), feature
+            )
+            myfuncs.save_python_object(
+                os.path.join(self.config.root_dir, f"train_target_{i}.pkl"), target
+            )

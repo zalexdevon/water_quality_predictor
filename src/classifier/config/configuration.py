@@ -55,6 +55,8 @@ class ConfigurationManager:
         number = params.number
         batch_size = int(number.split("_")[-1]) if "batch" in number else None
 
+        is_weighted = True if "w" in number else False
+
         data_transformation_config = DataTransformationConfig(
             # config input
             train_data_path=config.train_data_path,
@@ -72,8 +74,11 @@ class ConfigurationManager:
             # params
             do_smote=params.do_smote,
             list_after_feature_transformer=params.list_after_feature_transformer,
+            # param dành cho weighted
+            weights=params.weights,
             # params được suy ra
             batch_size=batch_size,
+            is_weighted=is_weighted,
         )
 
         return data_transformation_config

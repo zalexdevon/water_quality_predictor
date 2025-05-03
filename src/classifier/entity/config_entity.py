@@ -35,8 +35,12 @@ class DataTransformationConfig:
     do_smote: str
     list_after_feature_transformer: list
 
+    # param dành cho weighted
+    weights: list
+
     # params được suy ra
     batch_size: int
+    is_weighted: bool
 
 
 @dataclass(frozen=True)

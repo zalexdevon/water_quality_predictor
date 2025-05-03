@@ -1,6 +1,12 @@
 from classifier.config.configuration import ConfigurationManager
 from classifier.components.data_transformation import DataTransformation
 from classifier.components.data_transformation_batch import DataTransformationBatch
+from classifier.components.data_transformation_weighted import (
+    DataTransformationWeighted,
+)
+from classifier.components.data_transformation_batch_weighted import (
+    DataTransformationWeightedBatch,
+)
 from classifier import logger
 from pathlib import Path
 import traceback
@@ -16,10 +22,30 @@ class DataTransformationPipeline:
         config = ConfigurationManager()
         data_transformation_config = config.get_data_transformation_config()
 
-        if data_transformation_config.batch_size is None:
+        if (
+            data_transformation_config.batch_size is None
+            and data_transformation_config.is_weighted == False
+        ):
             data_transformation = DataTransformation(config=data_transformation_config)
-        else:
+        elif (
+            data_transformation_config.batch_size is not None
+            and data_transformation_config.is_weighted == False
+        ):
             data_transformation = DataTransformationBatch(
+                config=data_transformation_config
+            )
+        elif (
+            data_transformation_config.batch_size is None
+            and data_transformation_config.is_weighted
+        ):
+            data_transformation = DataTransformationWeighted(
+                config=data_transformation_config
+            )
+        elif (
+            data_transformation_config.batch_size is not None
+            and data_transformation_config.is_weighted
+        ):
+            data_transformation = DataTransformationWeightedBatch(
                 config=data_transformation_config
             )
 

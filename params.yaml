@@ -8,10 +8,13 @@ data_correction:
 
 # DATA TRANSFORMATION
 data_transformation: 
-      number: dt6            # id của data_transformation
+      number: dt6_w   # w: weighted
       data_correction_name: dc4
       do_smote: f # t: true, f: false
       list_after_feature_transformer: []
+
+      # dành cho weighted
+      weights: [0.1, 0.2, 0.3]
 
 
 # MODEL TRAINING  

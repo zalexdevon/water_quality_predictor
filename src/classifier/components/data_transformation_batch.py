@@ -15,97 +15,7 @@ from imblearn.over_sampling import SMOTE
 from Mylib import stringToObjectConverter
 import os
 import math
-
-
-class DuringFeatureTransformer(BaseEstimator, TransformerMixin):
-    def __init__(self, feature_ordinal_dict) -> None:
-        super().__init__()
-        self.feature_ordinal_dict = feature_ordinal_dict
-
-    def fit(self, X, y=None):
-        # Lấy các cột numeric, nominal, ordinal
-        (
-            numeric_cols,
-            numericcat_cols,
-            _,
-            _,
-            nominal_cols,
-            _,
-        ) = myfuncs.get_different_types_feature_cols_from_df_14(X)
-
-        numeric_cols = numeric_cols + numericcat_cols
-
-        ordinal_binary_cols = list(self.feature_ordinal_dict.keys())
-
-        nominal_cols_pipeline = Pipeline(
-            steps=[
-                ("1", OneHotEncoder(sparse_output=False, drop="first")),
-                ("2", MinMaxScaler()),
-            ]
-        )
-
-        ordinal_binary_cols_pipeline = Pipeline(
-            steps=[
-                (
-                    "1",
-                    OrdinalEncoder(categories=list(self.feature_ordinal_dict.values())),
-                ),
-                ("2", MinMaxScaler()),
-            ]
-        )
-
-        self.column_transformer = ColumnTransformer(
-            transformers=[
-                ("1", MinMaxScaler(), numeric_cols),
-                ("2", nominal_cols_pipeline, nominal_cols),
-                ("3", ordinal_binary_cols_pipeline, ordinal_binary_cols),
-            ],
-        )
-
-        self.column_transformer.fit(X)
-
-    def transform(self, X, y=None):
-        X = self.column_transformer.transform(X)
-
-        self.cols = myfuncs.get_real_column_name_from_get_feature_names_out(
-            self.column_transformer.get_feature_names_out()
-        )
-
-        return pd.DataFrame(X, columns=self.cols)
-
-    def fit_transform(self, X, y=None):
-        self.fit(X)
-        return self.transform(X)
-
-    def get_feature_names_out(self, input_features=None):
-        return self.cols
-
-
-class NamedColumnTransformer(BaseEstimator, TransformerMixin):
-    def __init__(self, column_transformer) -> None:
-        super().__init__()
-        self.column_transformer = column_transformer
-
-    def fit(self, X, y=None):
-        self.column_transformer.fit(X)
-
-    def transform(self, X, y=None):
-        X = self.column_transformer.transform(X)
-
-        cols = myfuncs.fix_name_by_LGBM_standard(
-            myfuncs.get_real_column_name_from_get_feature_names_out(
-                self.column_transformer.get_feature_names_out()
-            )
-        )
-
-        return pd.DataFrame(
-            X,
-            columns=cols,
-        )
-
-    def fit_transform(self, X, y=None):
-        self.fit(X)
-        return self.transform(X)
+from Mylib import myclasses
 
 
 class DataTransformationBatch:
@@ -152,7 +62,10 @@ class DataTransformationBatch:
 
         feature_pipeline = Pipeline(
             steps=[
-                ("during", DuringFeatureTransformer(self.feature_ordinal_dict)),
+                (
+                    "during",
+                    myclasses.DuringFeatureTransformer(self.feature_ordinal_dict),
+                ),
                 ("after", after_feature_pipeline),
             ]
         )
@@ -164,7 +77,9 @@ class DataTransformationBatch:
             ]
         )
 
-        self.transformation_transformer = NamedColumnTransformer(column_transformer)
+        self.transformation_transformer = myclasses.NamedColumnTransformer(
+            column_transformer
+        )
 
     def transform_data(self):
         df_train_transformed = self.transformation_transformer.fit_transform(

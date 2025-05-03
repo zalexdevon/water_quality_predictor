@@ -16,9 +16,9 @@ data_transformation:
 
 # MODEL TRAINING  
 model_trainer: 
-      model_name: model3   # mt: multithreading
-      data_transformation_name: dt3
-      model_train_num: 14
+      model_name: model4   # mt: multithreading
+      data_transformation_name: dt4
+      model_train_num: 15
       model_training_type: m  # rcv: randomisedcv, gcv: gridcv, r: randomisedTrainVal, g: gridTrainVal, m: many models
 
       # Cần cho model_training_type = rcv, gcv, r, g
@@ -35,7 +35,9 @@ model_trainer:
 
       # Càn cho model_training_type = m
       models: 
-            - XGBClassifier(n_estimators=300, max_depth=30, reg_alpha=1, reg_lambda=5, learning_rate=0.01)|4
+            - LogisticRegression(penalty='l2', C=100, max_iter=1000)|0
+            - LogisticRegression(penalty='elasticnet', solver='saga', l1_ratio=0.7, C=100, max_iter=1000)|1
+            - LogisticRegression(penalty='elasticnet', solver='saga', l1_ratio=0.9, C=100, max_iter=1000)|2
 
 
 

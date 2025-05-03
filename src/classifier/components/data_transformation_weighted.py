@@ -38,6 +38,9 @@ class DataTransformationWeighted:
             myfuncs.get_feature_cols_and_target_col_from_df_27(self.df_train)
         )
 
+        # Load weights
+        self.weights = myfuncs.load_python_object(self.config.weights_path)
+
         # Load các transfomers
         self.list_after_feature_transformer = [
             stringToObjectConverter.convert_MLmodel_yaml_to_object(transformer)
@@ -66,7 +69,7 @@ class DataTransformationWeighted:
                 ),
                 (
                     "1",
-                    myclasses.MultiplyWeightsTransformer(weights=self.config.weights),
+                    myclasses.MultiplyWeightsTransformer(weights=self.weights),
                 ),
                 ("after", after_feature_pipeline),
             ]
@@ -84,6 +87,8 @@ class DataTransformationWeighted:
         )
 
     def transform_data(self):
+        print("TIẾN HÀNH TRANSFORM DỮ LIỆU WEIGHTED\n")
+
         df_train_transformed = self.transformation_transformer.fit_transform(
             self.df_train
         )

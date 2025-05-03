@@ -8,13 +8,14 @@ data_correction:
 
 # DATA TRANSFORMATION
 data_transformation: 
-      number: dt1_new   # weighted 
+      number: dt1_new_weighted   # weighted 
       data_correction_name: dc1_new 
       do_smote: f # t: true, f: false
       list_after_feature_transformer: []
 
       # dành cho weighted
-      weights: [0.1, 0.2, 0.3]
+      weights: dt1_new
+
 
 
 # MODEL TRAINING  

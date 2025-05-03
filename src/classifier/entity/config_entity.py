@@ -20,6 +20,7 @@ class DataTransformationConfig:
     train_data_path: Path
     feature_ordinal_dict_path: Path
     correction_transformer_path: Path
+    weights_path: Path
     val_data_path: Path
 
     # config output
@@ -34,9 +35,6 @@ class DataTransformationConfig:
     # params
     do_smote: str
     list_after_feature_transformer: list
-
-    # param dành cho weighted
-    weights: list
 
     # params được suy ra
     batch_size: int

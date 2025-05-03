@@ -9,6 +9,8 @@ params = read_yaml(PARAMS_FILE_PATH)
 
 C = params.data_correction.name
 
+WEIGHTED = params.data_transformation.weights
+
 CP = params.data_transformation.data_correction_name
 P = params.data_transformation.number
 
@@ -25,6 +27,7 @@ E = params.model_evaluation.model_name
 
 replace_dict = {
     "${C}": C,
+    "${WEIGHTED}": WEIGHTED,
     "${CP}": CP,
     "${P}": P,
     "${PT}": PT,

@@ -62,6 +62,7 @@ class ConfigurationManager:
             train_data_path=config.train_data_path,
             feature_ordinal_dict_path=config.feature_ordinal_dict_path,
             correction_transformer_path=config.correction_transformer_path,
+            weights_path=config.weights_path,
             val_data_path=config.val_data_path,
             # config output
             root_dir=config.root_dir,
@@ -74,8 +75,6 @@ class ConfigurationManager:
             # params
             do_smote=params.do_smote,
             list_after_feature_transformer=params.list_after_feature_transformer,
-            # param dành cho weighted
-            weights=params.weights,
             # params được suy ra
             batch_size=batch_size,
             is_weighted=is_weighted,

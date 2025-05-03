@@ -73,6 +73,7 @@ class ConfigurationManager:
             val_target_path=config.val_target_path,
             class_names_path=config.class_names_path,
             # params
+            number=params.number,
             do_smote=params.do_smote,
             list_after_feature_transformer=params.list_after_feature_transformer,
             # params được suy ra

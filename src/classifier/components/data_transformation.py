@@ -99,7 +99,7 @@ class DataTransformation:
                 df_train_feature, df_train_target
             )
 
-        print(f"Kích thước tập training: {df_train_feature.shape}")
+        print(f"Kích thước tập {self.config.number}: {df_train_feature.shape}")
 
         df_val_corrected = self.correction_transformer.transform(
             self.df_val, data_type="test"

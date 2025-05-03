@@ -62,9 +62,9 @@ class ManyModelsTypeModelTrainer:
                 os.path.join(self.config.root_dir, f"{model_index}.pkl")
             )
 
-            print(f"Bắt đầu train model {model_index}")
+            print(f"Bắt đầu train model {self.config.model_name} - {model_index}")
             model.fit(self.train_feature_data, self.train_target_data)
-            print(f"Kết thúc train model {model_index}")
+            print(f"Kết thúc train model {self.config.model_name} - {model_index}")
 
             train_scoring = myfuncs.evaluate_model_on_one_scoring_17(
                 model,
@@ -82,7 +82,7 @@ class ManyModelsTypeModelTrainer:
             # In kết quả
             print("Kết quả của model")
             print(
-                f"Model index {model_index}\n -> Train {self.config.scoring}: {train_scoring}, Val {self.config.scoring}: {val_scoring}\n"
+                f"Model index {self.config.model_name} - {model_index}\n -> Train {self.config.scoring}: {train_scoring}, Val {self.config.scoring}: {val_scoring}\n"
             )
 
             # Lưu model lại

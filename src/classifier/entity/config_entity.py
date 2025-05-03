@@ -33,6 +33,7 @@ class DataTransformationConfig:
     class_names_path: Path
 
     # params
+    number: str
     do_smote: str
     list_after_feature_transformer: list
 

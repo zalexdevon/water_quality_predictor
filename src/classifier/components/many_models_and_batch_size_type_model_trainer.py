@@ -90,14 +90,9 @@ class ManyModelsAndBatchSizeTypeModelTrainer:
                 os.path.join(self.config.root_dir, f"{model_index}.pkl")
             )
 
-            # TODO: d
-            print("Đã load xong model")
-            print(f"Model: {model}")
-            # d
-
-            print(f"Bắt đầu train  model {model_index}")
+            print(f"Bắt đầu train  model {self.config.model_name} - {model_index}")
             train_scoring = self.train_on_batches(model)
-            print(f"Kết thúc train model {model_index}")
+            print(f"Kết thúc train model {self.config.model_name} - {model_index}")
 
             val_scoring = myfuncs.evaluate_model_on_one_scoring_17(
                 model,
@@ -109,7 +104,7 @@ class ManyModelsAndBatchSizeTypeModelTrainer:
             # In kết quả
             print("Kết quả của model")
             print(
-                f"Model index {model_index}\n -> Train {self.config.scoring}: {train_scoring}, Val {self.config.scoring}: {val_scoring}\n"
+                f"Model index {self.config.model_name} - {model_index}\n -> Train {self.config.scoring}: {train_scoring}, Val {self.config.scoring}: {val_scoring}\n"
             )
 
             # Lưu model lại

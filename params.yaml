@@ -18,7 +18,7 @@ data_transformation:
 model_trainer: 
       model_name: model4   # mt: multithreading
       data_transformation_name: dt4
-      model_train_num: 18
+      model_train_num: 20
       model_training_type: m  # rcv: randomisedcv, gcv: gridcv, r: randomisedTrainVal, g: gridTrainVal, m: many models
 
       # Cần cho model_training_type = rcv, gcv, r, g

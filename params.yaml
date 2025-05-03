@@ -8,8 +8,8 @@ data_correction:
 
 # DATA TRANSFORMATION
 data_transformation: 
-      number: dt5            # id của data_transformation
-      data_correction_name: dc3
+      number: dt6            # id của data_transformation
+      data_correction_name: dc4
       do_smote: f # t: true, f: false
       list_after_feature_transformer: []
 

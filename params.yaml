@@ -8,8 +8,8 @@ data_correction:
 
 # DATA TRANSFORMATION
 data_transformation: 
-      number: dt6_w   # w: weighted
-      data_correction_name: dc4
+      number: dt1_new   # weighted 
+      data_correction_name: dc1_new 
       do_smote: f # t: true, f: false
       list_after_feature_transformer: []
 

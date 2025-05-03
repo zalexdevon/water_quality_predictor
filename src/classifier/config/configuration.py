@@ -55,7 +55,7 @@ class ConfigurationManager:
         number = params.number
         batch_size = int(number.split("_")[-1]) if "batch" in number else None
 
-        is_weighted = True if "w" in number else False
+        is_weighted = True if "weighted" in number else False
 
         data_transformation_config = DataTransformationConfig(
             # config input

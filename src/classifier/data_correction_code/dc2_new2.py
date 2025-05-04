@@ -8,9 +8,8 @@ from classifier.data_correction_code import dc1_new2
 
 
 class Transformer(BaseEstimator, TransformerMixin):
-    def __init__(self, weights) -> None:
+    def __init__(self) -> None:
         super().__init__()
-        self.weights = weights
 
     def fit(self, X, y=None):
 

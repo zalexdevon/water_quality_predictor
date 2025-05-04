@@ -20,9 +20,7 @@ class TestDataCorrection:
         self.preprocessor = myfuncs.load_python_object(self.config.preprocessor_path)
 
     def transform_data(self):
-        df_transformed = self.preprocessor.transform(
-            self.test_raw_data, data_type="test"
-        )
+        df_transformed = self.preprocessor.transform(self.test_raw_data)
 
         # Lưu dữ liệu
         myfuncs.save_python_object(self.config.test_data_path, df_transformed)

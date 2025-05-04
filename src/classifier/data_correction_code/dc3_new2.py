@@ -18,6 +18,26 @@ class Transformer(BaseEstimator, TransformerMixin):
     def transform(self, X, y=None):
         df = X
 
+        self.cols = df.columns.tolist()
+        return df
+
+    def fit_transform(self, X, y=None):
+        self.fit(X)
+        return self.transform(X)
+
+    def get_feature_names_out(self, input_features=None):
+        return self.cols
+
+
+class TransformerOnTrain(BaseEstimator, TransformerMixin):
+    def __init__(self) -> None:
+        super().__init__()
+
+    def fit(self, X, y=None):
+        df = X
+
+        print("Tiến hành TransformerOnTrain !!!!!!")
+
         cols = [
             "Iron_num",
             "Nitrate_num",
@@ -34,8 +54,11 @@ class Transformer(BaseEstimator, TransformerMixin):
         myfuncs.replace_outliers_in_many_cols_with_new_value_58(df, cols, "median")
 
         self.cols = df.columns.tolist()
-
         return df
+
+    def transform(self, X, y=None):
+
+        return X
 
     def fit_transform(self, X, y=None):
         self.fit(X)
@@ -49,6 +72,7 @@ dc = Pipeline(
     steps=[
         ("1", dc1_new2.dc),
         ("2", Transformer()),
+        ("3", TransformerOnTrain()),
     ]
 )
 

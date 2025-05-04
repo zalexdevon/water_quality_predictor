@@ -51,7 +51,7 @@ class TransformerOnTrain(BaseEstimator, TransformerMixin):
             "Manganese_num",
             "Water_Temperature_num",
         ]
-        myfuncs.log_many_columns_57(df, cols, "median")
+        myfuncs.log_many_columns_57(df, cols)
 
         self.cols = df.columns.tolist()
         return df

@@ -15,7 +15,7 @@ from imblearn.over_sampling import SMOTE
 from Mylib import stringToObjectConverter
 import re
 from sklearn.impute import SimpleImputer
-from classifier.data_correction_code.dc1_new import DC, FEATURE_ORDINAL_DICT
+from classifier.data_correction_code.dc1_new2 import dc, FEATURE_ORDINAL_DICT
 
 
 class DataCorrection:
@@ -26,10 +26,10 @@ class DataCorrection:
         self.df = myfuncs.load_python_object(self.config.train_data_path)
 
     def create_preprocessor_for_train_data(self):
-        self.transformer = DC()
+        self.transformer = dc
 
     def transform_data(self):
-        df = self.transformer.transform(self.df, data_type="train")
+        df = self.transformer.fit_transform(self.df)
 
         print(f"Kích thước của tập là {df.shape}")
 

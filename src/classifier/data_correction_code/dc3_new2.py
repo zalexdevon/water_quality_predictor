@@ -18,15 +18,11 @@ class Transformer(BaseEstimator, TransformerMixin):
     def transform(self, X, y=None):
         df = X
 
-        self.cols = df.columns.tolist()
         return df
 
     def fit_transform(self, X, y=None):
         self.fit(X)
         return self.transform(X)
-
-    def get_feature_names_out(self, input_features=None):
-        return self.cols
 
 
 class TransformerOnTrain(BaseEstimator, TransformerMixin):
@@ -53,7 +49,6 @@ class TransformerOnTrain(BaseEstimator, TransformerMixin):
         ]
         myfuncs.log_many_columns_57(df, cols)
 
-        self.cols = df.columns.tolist()
         return df
 
     def transform(self, X, y=None):
@@ -63,9 +58,6 @@ class TransformerOnTrain(BaseEstimator, TransformerMixin):
     def fit_transform(self, X, y=None):
         self.fit(X)
         return self.transform(X)
-
-    def get_feature_names_out(self, input_features=None):
-        return self.cols
 
 
 dc = Pipeline(

@@ -42,6 +42,8 @@ class ConfigurationManager:
             data_path=config.data_path,
             feature_ordinal_dict_path=config.feature_ordinal_dict_path,
             correction_transformer_path=config.correction_transformer_path,
+            # param
+            name=params.name,
         )
 
         return data_correction_config

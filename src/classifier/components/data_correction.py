@@ -29,6 +29,8 @@ class DataCorrection:
         self.transformer = dc
 
     def transform_data(self):
+        print(f"Đang correct dữ liệu cho {self.config.name}")
+
         df = self.transformer.fit_transform(self.df)
 
         print(f"Kích thước của tập là {df.shape}")

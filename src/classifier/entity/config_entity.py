@@ -13,6 +13,9 @@ class DataCorrectionConfig:
     feature_ordinal_dict_path: Path
     correction_transformer_path: Path
 
+    # param
+    name: str
+
 
 @dataclass(frozen=True)
 class DataTransformationConfig:

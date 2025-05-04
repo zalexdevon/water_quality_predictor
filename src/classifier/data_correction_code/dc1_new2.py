@@ -2,7 +2,7 @@ import pandas as pd
 from Mylib import myfuncs
 from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
-from sklearn.ensemble import BaseEstimator, TransformerMixin
+from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.pipeline import Pipeline
 
 

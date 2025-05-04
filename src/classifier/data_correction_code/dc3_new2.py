@@ -51,7 +51,7 @@ class TransformerOnTrain(BaseEstimator, TransformerMixin):
             "Manganese_num",
             "Water_Temperature_num",
         ]
-        myfuncs.replace_outliers_in_many_cols_with_new_value_58(df, cols, "median")
+        myfuncs.log_many_columns_57(df, cols, "median")
 
         self.cols = df.columns.tolist()
         return df

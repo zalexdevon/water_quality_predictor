@@ -14,9 +14,13 @@ class ModelEvaluation:
     def evaluate_model(self):
         # Load data
         df = myfuncs.load_python_object(self.config.test_data_path)
-        preprocessor = myfuncs.load_python_object(self.config.preprocessor_path)
+        preprocessor = myfuncs.load_python_object(
+            os.path.join(self.config.data_transformation_path, "transformer.pkl")
+        )
         self.model = myfuncs.load_python_object(self.config.model_path)
-        self.class_names = myfuncs.load_python_object(self.config.class_names_path)
+        self.class_names = myfuncs.load_python_object(
+            os.path.join(self.config.data_transformation_path, "class_names.pkl")
+        )
 
         # Transform test data
         target_col = myfuncs.get_target_col_from_df_26(df_transformed)
@@ -52,5 +56,5 @@ class ModelEvaluation:
         )
 
         # Lưu chỉ số đánh giá vào file results.txt
-        with open(self.config.results_path, mode="w") as file:
+        with open(os.path.join(self.config.root_dir, "results.txt"), mode="w") as file:
             file.write(self.model_results_text)

@@ -18,6 +18,8 @@ class Transformer(BaseEstimator, TransformerMixin):
     def transform(self, X, y=None):
         df = X
 
+        df = df.drop(columns=["Iron_num"])
+
         return df
 
     def fit_transform(self, X, y=None):
@@ -33,19 +35,10 @@ class TransformerOnTrain(BaseEstimator, TransformerMixin):
         df = X
 
         cols = [
-            "Iron_num",
             "Nitrate_num",
             "Chloride_num",
-            "Lead_num",
-            "Zinc_num",
-            "Turbidity_num",
-            "Fluoride_num",
-            "Copper_num",
-            "Sulfate_num",
-            "Manganese_num",
-            "Water_Temperature_num",
         ]
-        myfuncs.replace_outliers_in_many_cols_with_new_value_58(df, cols, "median")
+        df[cols] = 0
 
         return df
 

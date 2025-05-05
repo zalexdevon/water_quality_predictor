@@ -23,4 +23,7 @@ class TestDataCorrection:
         df_transformed = self.preprocessor.transform(self.test_raw_data)
 
         # Lưu dữ liệu
-        myfuncs.save_python_object(self.config.test_data_path, df_transformed)
+        myfuncs.save_python_object(
+            os.path.join(self.config.root_dir, "test_data.pkl"),
+            df_transformed,
+        )

@@ -29,13 +29,17 @@ class ManyModelsTypeModelTrainer:
     def load_data_to_train(self):
         # Load các training data
         self.train_feature_data = myfuncs.load_python_object(
-            self.config.train_feature_path
+            os.path.join(self.config.data_transformation_path, "train_features.pkl")
         )
         self.train_target_data = myfuncs.load_python_object(
-            self.config.train_target_path
+            os.path.join(self.config.data_transformation_path, "train_target.pkl")
         )
-        self.val_feature_data = myfuncs.load_python_object(self.config.val_feature_path)
-        self.val_target_data = myfuncs.load_python_object(self.config.val_target_path)
+        self.val_feature_data = myfuncs.load_python_object(
+            os.path.join(self.config.data_transformation_path, "val_features.pkl")
+        )
+        self.val_target_data = myfuncs.load_python_object(
+            os.path.join(self.config.data_transformation_path, "val_target.pkl")
+        )
 
         # Load models
         self.models, self.model_indices = myfuncs.get_models_from_yaml_52(

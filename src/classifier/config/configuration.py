@@ -39,9 +39,6 @@ class ConfigurationManager:
             train_data_path=config.train_data_path,
             # config output
             root_dir=config.root_dir,
-            data_path=config.data_path,
-            feature_ordinal_dict_path=config.feature_ordinal_dict_path,
-            correction_transformer_path=config.correction_transformer_path,
             # param
             name=params.name,
         )
@@ -61,19 +58,11 @@ class ConfigurationManager:
 
         data_transformation_config = DataTransformationConfig(
             # config input
-            train_data_path=config.train_data_path,
-            feature_ordinal_dict_path=config.feature_ordinal_dict_path,
-            correction_transformer_path=config.correction_transformer_path,
+            data_correction_path=config.data_correction_path,
             weights_path=config.weights_path,
             val_data_path=config.val_data_path,
             # config output
             root_dir=config.root_dir,
-            transformation_transformer_path=config.transformation_transformer_path,
-            train_features_path=config.train_features_path,
-            train_target_path=config.train_target_path,
-            val_features_path=config.val_features_path,
-            val_target_path=config.val_target_path,
-            class_names_path=config.class_names_path,
             # params
             number=params.number,
             do_smote=params.do_smote,
@@ -100,10 +89,6 @@ class ConfigurationManager:
         model_trainer_config = ModelTrainerConfig(
             # config input
             data_transformation_path=config.data_transformation_path,
-            train_feature_path=config.train_feature_path,
-            train_target_path=config.train_target_path,
-            val_feature_path=config.val_feature_path,
-            val_target_path=config.val_target_path,
             # config output
             root_dir=config.root_dir,
             # config common
@@ -158,7 +143,6 @@ class ConfigurationManager:
             preprocessor_path=config.preprocessor_path,
             # output
             root_dir=config.root_dir,
-            test_data_path=config.test_data_path,
         )
 
         return obj
@@ -172,12 +156,10 @@ class ConfigurationManager:
         obj = ModelEvaluationConfig(
             # input
             test_data_path=config.test_data_path,
-            preprocessor_path=config.preprocessor_path,
+            data_transformation_path=config.data_transformation_path,
             model_path=config.model_path,
-            class_names_path=config.class_names_path,
             # output
             root_dir=config.root_dir,
-            results_path=config.results_path,
             # common params
             scoring=self.params.scoring,
         )

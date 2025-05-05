@@ -54,6 +54,7 @@ model_evaluation:
       data_correction_name: dc1
       data_transformation_no: dt1
       model_name: XGB_12
+      model_index: 1
 
 # MONITOR PLOT
 monitor_plotter:

@@ -16,6 +16,7 @@ from Mylib import stringToObjectConverter
 import re
 from sklearn.impute import SimpleImputer
 from classifier.data_correction_code.dc3_new2 import dc, FEATURE_ORDINAL_DICT
+import os
 
 
 class DataCorrection:
@@ -33,12 +34,17 @@ class DataCorrection:
 
         df = self.transformer.fit_transform(self.df)
 
-        print(f"Kích thước của tập là {df.shape}")
+        print(f"Kích thước của tập {self.config.name} là {df.shape}")
 
-        myfuncs.save_python_object(self.config.data_path, df)
         myfuncs.save_python_object(
-            self.config.feature_ordinal_dict_path, FEATURE_ORDINAL_DICT
+            os.path.join(self.config.root_dir, "data.pkl"),
+            df,
         )
         myfuncs.save_python_object(
-            self.config.correction_transformer_path, self.transformer
+            os.path.join(self.config.root_dir, "feature_ordinal_dict.pkl"),
+            FEATURE_ORDINAL_DICT,
+        )
+        myfuncs.save_python_object(
+            os.path.join(self.config.root_dir, "transformer.pkl"),
+            self.transformer,
         )

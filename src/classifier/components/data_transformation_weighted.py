@@ -14,6 +14,7 @@ from sklearn.base import BaseEstimator, TransformerMixin
 from imblearn.over_sampling import SMOTE
 from Mylib import stringToObjectConverter
 from Mylib import myclasses
+import os
 
 
 class DataTransformationWeighted:
@@ -21,13 +22,15 @@ class DataTransformationWeighted:
         self.config = config
 
     def load_data(self):
-        self.df_train = myfuncs.load_python_object(self.config.train_data_path)
+        self.df_train = myfuncs.load_python_object(
+            os.path.join(self.config.data_correction_path, "data.pkl")
+        )
         self.feature_ordinal_dict = myfuncs.load_python_object(
-            self.config.feature_ordinal_dict_path
+            os.path.join(self.config.data_correction_path, "feature_ordinal_dict.pkl")
         )
 
         self.correction_transformer = myfuncs.load_python_object(
-            self.config.correction_transformer_path
+            os.path.join(self.config.data_correction_path, "transformer.pkl")
         )
 
         self.df_val = myfuncs.load_python_object(self.config.val_data_path)
@@ -121,11 +124,21 @@ class DataTransformationWeighted:
         )
 
         myfuncs.save_python_object(
-            self.config.transformation_transformer_path, self.transformation_transformer
+            os.path.join(self.config.root_dir, "transformer.pkl"),
+            self.transformation_transformer,
         )
-        myfuncs.save_python_object(self.config.train_features_path, df_train_feature)
-        myfuncs.save_python_object(self.config.train_target_path, df_train_target)
-        myfuncs.save_python_object(self.config.val_features_path, df_val_feature)
-        myfuncs.save_python_object(self.config.val_target_path, df_val_target)
-        myfuncs.save_python_object(self.config.val_target_path, df_val_target)
-        myfuncs.save_python_object(self.config.class_names_path, class_names)
+        myfuncs.save_python_object(
+            os.path.join(self.config.root_dir, "train_features.pkl"), df_train_feature
+        )
+        myfuncs.save_python_object(
+            os.path.join(self.config.root_dir, "train_target.pkl"), df_train_target
+        )
+        myfuncs.save_python_object(
+            os.path.join(self.config.root_dir, "val_features.pkl"), df_val_feature
+        )
+        myfuncs.save_python_object(
+            os.path.join(self.config.root_dir, "val_target.pkl"), df_val_target
+        )
+        myfuncs.save_python_object(
+            os.path.join(self.config.root_dir, "class_names.pkl"), class_names
+        )

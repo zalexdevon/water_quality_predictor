@@ -14,7 +14,7 @@ from sklearn.base import BaseEstimator, TransformerMixin
 from imblearn.over_sampling import SMOTE
 from Mylib import stringToObjectConverter
 import os
-import math
+import numpy as np
 from Mylib import myclasses
 
 
@@ -23,13 +23,15 @@ class DataTransformationBatch:
         self.config = config
 
     def load_data(self):
-        self.df_train = myfuncs.load_python_object(self.config.train_data_path)
+        self.df_train = myfuncs.load_python_object(
+            os.path.join(self.config.data_correction_path, "data.pkl")
+        )
         self.feature_ordinal_dict = myfuncs.load_python_object(
-            self.config.feature_ordinal_dict_path
+            os.path.join(self.config.data_correction_path, "feature_ordinal_dict.pkl")
         )
 
         self.correction_transformer = myfuncs.load_python_object(
-            self.config.correction_transformer_path
+            os.path.join(self.config.data_correction_path, "transformer.pkl")
         )
 
         self.df_val = myfuncs.load_python_object(self.config.val_data_path)
@@ -115,25 +117,38 @@ class DataTransformationBatch:
 
         # Lưu dữ liệu
         myfuncs.save_python_object(
-            self.config.transformation_transformer_path, self.transformation_transformer
+            os.path.join(self.config.root_dir, "transformer.pkl"),
+            self.transformation_transformer,
         )
-        myfuncs.save_python_object(self.config.val_features_path, df_val_feature)
-        myfuncs.save_python_object(self.config.val_target_path, df_val_target)
-        myfuncs.save_python_object(self.config.class_names_path, class_names)
+        myfuncs.save_python_object(
+            os.path.join(self.config.root_dir, "val_features.pkl"), df_val_feature
+        )
+        myfuncs.save_python_object(
+            os.path.join(self.config.root_dir, "val_target.pkl"), df_val_target
+        )
+        myfuncs.save_python_object(
+            os.path.join(self.config.root_dir, "class_names.pkl"), class_names
+        )
 
         num_train_samples = len(df_train_transformed)
-        num_batch = math.ceil(num_train_samples / self.config.batch_size)
+        num_batch = np.ceil(num_train_samples / self.config.batch_size)
         myfuncs.save_python_object(
             os.path.join(self.config.root_dir, "num_batch.pkl"), num_batch
         )
-        for i, index_batch in enumerate(
+        for batch_index, start_index in enumerate(
             range(0, num_train_samples, self.config.batch_size)
         ):
-            feature = df_train_feature.iloc[i : i + self.config.batch_size, :]
-            target = df_train_target.iloc[i : i + self.config.batch_size]
+            feature = df_train_feature.iloc[
+                start_index : start_index + self.config.batch_size, :
+            ]
+            target = df_train_target.iloc[
+                start_index : start_index + self.config.batch_size
+            ]
             myfuncs.save_python_object(
-                os.path.join(self.config.root_dir, f"train_features_{i}.pkl"), feature
+                os.path.join(self.config.root_dir, f"train_features_{batch_index}.pkl"),
+                feature,
             )
             myfuncs.save_python_object(
-                os.path.join(self.config.root_dir, f"train_target_{i}.pkl"), target
+                os.path.join(self.config.root_dir, f"train_target_{batch_index}.pkl"),
+                target,
             )

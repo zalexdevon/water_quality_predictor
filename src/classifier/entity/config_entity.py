@@ -1,17 +1,13 @@
 from dataclasses import dataclass
-from pathlib import Path
 
 
 @dataclass(frozen=True)
 class DataCorrectionConfig:
     # config input
-    train_data_path: Path
+    train_data_path: str
 
     # config output
-    root_dir: Path
-    data_path: Path
-    feature_ordinal_dict_path: Path
-    correction_transformer_path: Path
+    root_dir: str
 
     # param
     name: str
@@ -20,20 +16,12 @@ class DataCorrectionConfig:
 @dataclass(frozen=True)
 class DataTransformationConfig:
     # config input
-    train_data_path: Path
-    feature_ordinal_dict_path: Path
-    correction_transformer_path: Path
-    weights_path: Path
-    val_data_path: Path
+    data_correction_path: str
+    weights_path: str
+    val_data_path: str
 
     # config output
-    root_dir: Path
-    transformation_transformer_path: Path
-    train_features_path: Path
-    train_target_path: Path
-    val_features_path: Path
-    val_target_path: Path
-    class_names_path: Path
+    root_dir: str
 
     # params
     number: str
@@ -48,17 +36,13 @@ class DataTransformationConfig:
 @dataclass(frozen=True)
 class ModelTrainerConfig:
     # config input
-    data_transformation_path: Path
-    train_feature_path: Path
-    train_target_path: Path
-    val_feature_path: Path
-    val_target_path: Path
+    data_transformation_path: str
 
     # config output
-    root_dir: Path
+    root_dir: str
 
     # config common
-    plot_dir: Path
+    plot_dir: str
 
     # params
     model_name: str
@@ -84,37 +68,34 @@ class ModelTrainerConfig:
 @dataclass(frozen=True)
 class ModeEvaluationOnTrainValDataConfig:
     # config input
-    data_transformation_path: Path
-    model_path: Path
+    data_transformation_path: str
+    model_path: str
 
     # config output
-    root_dir: Path
+    root_dir: str
 
 
 # TEST DATA CORRECTION
 @dataclass(frozen=True)
 class TestDataCorrectionConfig:
     # input
-    test_raw_data_path: Path
-    preprocessor_path: Path
+    test_raw_data_path: str
+    preprocessor_path: str
 
     # output
-    root_dir: Path
-    test_data_path: Path
+    root_dir: str
 
 
 # MODEL_EVALUATION
 @dataclass(frozen=True)
 class ModelEvaluationConfig:
     # input
-    test_data_path: Path
-    preprocessor_path: Path
-    model_path: Path
-    class_names_path: Path
+    test_data_path: str
+    data_transformation_path: str
+    model_path: str
 
     # output
-    root_dir: Path
-    results_path: Path
+    root_dir: str
 
     # common params
     scoring: str
@@ -122,7 +103,7 @@ class ModelEvaluationConfig:
 
 @dataclass(frozen=True)
 class MonitorPlotterConfig:
-    plot_dir: Path
+    plot_dir: str
     target_val_value: float
     max_val_value: float
     dtick_y_value: float

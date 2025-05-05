@@ -24,7 +24,7 @@ MIV = str(params.model_evaluation_on_train_val.model_index)
 CE = params.model_evaluation.data_correction_name
 PE = params.model_evaluation.data_transformation_no
 ME = params.model_evaluation.model_name
-MIE = params.model_evaluation.model_index
+MIE = str(params.model_evaluation.model_index)
 
 replace_dict = {
     "${C}": C,

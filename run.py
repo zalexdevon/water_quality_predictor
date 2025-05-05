@@ -38,7 +38,8 @@ replace_dict = {
     "${MIV}": MIV,
     "${CE}": CE,
     "${PE}": PE,
-    "${E}": E,
+    "${ME}": ME,
+    "${MIE}": MIE,
 }
 
 sub_param_for_yaml_file("config_p.yaml", "config.yaml", replace_dict)
